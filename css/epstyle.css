@@ -1,0 +1,306 @@
+body {
+    margin: 0;
+    font-family: 'Chakra Petch', sans-serif; /* Using a similar futuristic font */
+    background-color: #ffaa00; /* The dominant orange color */
+    color: #000; /* Default text color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px; /* Base padding */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+.container {
+    background-color: #ffaa00; /* Same as body background for a seamless look */
+    width: 100%;
+    max-width: 1000px; /* Adjust as needed */
+    height: 700px; /* Fixed height for the container to match the image aspect */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 5px solid #000; /* A black border to simulate the screen edge */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Optional: subtle shadow for depth */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.logo {
+    font-size: 2em;
+    font-weight: 700;
+}
+
+main {
+    display: flex;
+    flex: 1; /* Allows main to take up available space */
+    gap: 30px; /* Space between the left and right sections */
+}
+
+.course-info {
+    flex: 2; /* Takes more space on the left */
+    display: flex;
+    flex-direction: column;
+    padding-right: 20px; /* Space from the right section */
+}
+
+.course-info h1 {
+    font-size: 4em; /* Large "Phantomile" */
+    margin: 0;
+    line-height: 1;
+}
+
+.course-info p {
+    font-size: 1.5em; /* "JPN / Normal" */
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.track-map {
+    background-color: #000000;
+    flex-grow: 1; /* Makes the map take up remaining vertical space */
+    display: flex; /* Keep flexbox for centering if needed for the canvas, or remove if canvas fills */
+    justify-content: center; /* Center the canvas horizontally */
+    align-items: center; /* Center the canvas vertically */
+    padding: 20px; /* Keep padding around the canvas */
+    border-radius: 5px; /* Slightly rounded corners for the map box */
+    overflow: hidden; /* Crucial to clip any Three.js rendering that might go outside */
+    position: relative; /* Often useful for positioning elements within the canvas container */
+}
+
+/* New rule for the Three.js canvas */
+.track-map canvas {
+    display: block; /* Remove any default inline spacing below the canvas */
+    width: 100% !important; /* Make the canvas fill the container, overriding Three.js inline styles */
+    height: 100% !important; /* Make the canvas fill the container, overriding Three.js inline styles */
+    z-index: 2;
+    position: relative;
+    background-color: transparent;
+}
+
+/* New rule for the starfield canvas */
+.track-map #starfield-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Place starfield behind the logo */
+}
+
+.details-and-buttons {
+    flex: 1; /* Takes less space on the right */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Pushes stats to top, buttons to bottom */
+}
+
+.stats p {
+    font-size: 1.3em;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between buttons */
+    margin-top: auto; /* Pushes buttons to the bottom of their container */
+}
+
+.button {
+    display: block; /* Makes the button take full width */
+    background-color: #000;
+    color: #ffaa00;
+    text-align: center;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 5px; /* Subtle rounded corners for buttons */
+}
+
+.button:hover {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Specific button styling to match the image's "Start" button shape */
+.start-button {
+    position: relative;
+    padding-left: 50px; /* Space for the checkered pattern */
+    text-align: left; /* Align text to the left */
+}
+
+.start-button::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 25px; /* Size of one checker square */
+    height: 25px;
+    background-image:
+    linear-gradient(45deg, #ffaa00 25%, transparent 25%, transparent 75%, #ffaa00 75%, #ffaa00),
+    linear-gradient(45deg, #ffaa00 25%, transparent 25%, transparent 75%, #ffaa00 75%, #ffaa00);
+    background-size: 50% 50%; /* Each square is half the background size */
+    background-position: 0 0, 100% 100%; /* Position squares diagonally */
+}
+
+
+footer {
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 2px solid #000;
+    font-size: 0.9em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    gap: 10px;
+}
+
+.instructional-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.instruction {
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.instruction:hover {
+    color: #555;
+}
+
+.instruction.highlight {
+    color: red; /* "Please select" is red in the image */
+}
+
+.separator {
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    body {
+        padding: 10px; /* Reduce overall body padding */
+    }
+
+    .container {
+        height: auto; /* Allow height to adjust */
+        min-height: 90vh; /* Ensure it takes up most of the viewport height */
+        padding: 15px; /* Slightly less padding */
+    }
+
+    header {
+        margin-bottom: 15px;
+        font-size: 1em;
+    }
+
+    .logo {
+        font-size: 1.8em;
+    }
+
+    main {
+        flex-direction: column; /* Stack main sections vertically */
+        gap: 20px; /* Reduce gap */
+    }
+
+    /* Reorder elements on mobile */
+    .details-and-buttons {
+        order: -1; /* Move buttons section to the top */
+        margin-bottom: 20px; /* Add space below buttons when moved up */
+    }
+
+    .course-info {
+        order: 0; /* Keep course info below buttons */
+        padding-right: 0; /* Remove right padding */
+    }
+
+    .course-info h1 {
+        font-size: 3em; /* Smaller Phantomile text */
+    }
+
+    .course-info p {
+        font-size: 1.2em; /* Smaller JPN / Normal text */
+        margin-bottom: 15px;
+    }
+
+    .track-map {
+        /* Maintain aspect ratio for the track map */
+        width: 100%;
+        height: 0;
+        padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+        min-height: 180px; /* Ensure a minimum visible height for the canvas */
+        position: relative; /* Needed for absolute positioning of canvas */
+        padding: 10px; /* Smaller padding inside the map container */
+    }
+
+    .track-map canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .stats p {
+        font-size: 1.1em; /* Smaller stats text */
+        margin: 8px 0;
+    }
+
+    .action-buttons {
+        margin-top: 0; /* Remove auto margin as it's at the top now */
+        gap: 10px; /* Smaller gap between buttons */
+    }
+
+    .button {
+        padding: 12px 15px; /* Smaller button padding */
+        font-size: 1.3em; /* Smaller button text */
+    }
+
+    /* Ensure the checkered pattern is still visible and correctly sized */
+    .start-button {
+        padding-left: 45px; /* Adjust padding to accommodate smaller checker */
+    }
+
+    .start-button::before {
+        left: 10px; /* Adjust left position */
+        width: 20px; /* Smaller checker square */
+        height: 20px; /* Smaller checker square */
+        background-size: 50% 50%; /* Keep the same relative background size */
+    }
+
+    footer {
+        flex-direction: column; /* Stack footer content */
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 10px;
+        font-size: 0.8em;
+        gap: 8px; /* Smaller gap */
+    }
+
+    .instructional-buttons {
+        flex-direction: column; /* Stack instruction buttons */
+        gap: 5px; /* Smaller gap */
+    }
+
+    .separator {
+        display: none; /* Hide separators between instructions */
+    }
+}
